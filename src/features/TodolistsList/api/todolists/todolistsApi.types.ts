@@ -4,3 +4,7 @@ export type Todolist = {
   addedDate: string;
   order: number;
 };
+export type UpdateTodolistTitleArg = {
+  id: string;
+  title: string;
+};
