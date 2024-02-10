@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "common/hooks";
 import { selectTodolists } from "./model/todolists/todolistsSelectors";
 import { todolistsThunks } from "./model/todolists/todolistsSlice";
 import Paper from "@mui/material/Paper";
+import { Todolist } from "./Todolist/Todolist";
 
 export const TodolistsList = () => {
   const todolists = useAppSelector(selectTodolists);
@@ -19,14 +20,7 @@ export const TodolistsList = () => {
           return (
             <Grid key={tl.id} item style={{ marginTop: "20px" }}>
               <Paper elevation={3} style={{ padding: "20px" }}>
-                <h2>{tl.title}</h2>
-                <input />
-                <button>add</button>
-                <div>
-                  <button>All</button>
-                  <button>Completed</button>
-                  <button>Active</button>
-                </div>
+                <Todolist todolist={tl} />
               </Paper>
             </Grid>
           );
