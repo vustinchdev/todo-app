@@ -1,4 +1,5 @@
 import { TodolistDomain } from "../model/todolists/todolistsSlice";
+import { TodolistTitle } from "./TodolistTitle/TodolistTitle";
 
 type Props = {
   todolist: TodolistDomain;
@@ -7,7 +8,7 @@ type Props = {
 export const Todolist = ({ todolist }: Props) => {
   return (
     <div>
-      <h2>{todolist.title}</h2>
+      <TodolistTitle todolist={todolist} />
       <input />
       <button>add</button>
       <div>
