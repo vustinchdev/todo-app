@@ -3,7 +3,6 @@ import {
   TodolistDomain,
   todolistsActions,
   todolistsReducer,
-  todolistsThunks,
 } from "../todolistsSlice";
 
 let todolistId1: string;
@@ -34,9 +33,10 @@ beforeEach(() => {
 });
 
 test("todolists should be added", () => {
-  const action = todolistsThunks.setTodolists.fulfilled(
+  const action = todolistsActions.setTodolists.fulfilled(
     { todolists: startState },
     "requestId",
+    undefined,
   );
 
   const endState = todolistsReducer([], action);
@@ -54,7 +54,7 @@ test("correct todolist should be added", () => {
 
   const endState = todolistsReducer(
     startState,
-    todolistsThunks.addTodolist.fulfilled(
+    todolistsActions.addTodolist.fulfilled(
       { todolist: newTodolist },
       "requestId",
       "new todolist",
@@ -69,7 +69,7 @@ test("correct todolist should be added", () => {
 test("correct todolist should be deleted", () => {
   const endState = todolistsReducer(
     startState,
-    todolistsThunks.deleteTodolist.fulfilled(
+    todolistsActions.deleteTodolist.fulfilled(
       { id: todolistId2 },
       "requestId",
       todolistId2,
@@ -83,7 +83,7 @@ test("correct todolist should be deleted", () => {
 test("correct todolist should be changed title", () => {
   const endState = todolistsReducer(
     startState,
-    todolistsThunks.changeTodolistTitle.fulfilled(
+    todolistsActions.changeTodolistTitle.fulfilled(
       { id: todolistId2, title: "new title" },
       "requestId",
       { id: todolistId2, title: "new title" },

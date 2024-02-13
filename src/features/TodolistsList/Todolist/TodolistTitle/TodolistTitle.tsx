@@ -2,7 +2,7 @@ import { EditableSpan } from "common/components/EditableSpan/EditableSpan";
 import { useAppDispatch } from "common/hooks";
 import {
   TodolistDomain,
-  todolistsThunks,
+  todolistsActions,
 } from "features/TodolistsList/model/todolists/todolistsSlice";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -14,10 +14,10 @@ type Props = {
 export const TodolistTitle = ({ todolist }: Props) => {
   const dispatch = useAppDispatch();
   const changeTodolistTitle = (title: string) => {
-    dispatch(todolistsThunks.changeTodolistTitle({ id: todolist.id, title }));
+    dispatch(todolistsActions.changeTodolistTitle({ id: todolist.id, title }));
   };
   const removeTodolistHandler = () => {
-    dispatch(todolistsThunks.deleteTodolist(todolist.id));
+    dispatch(todolistsActions.deleteTodolist(todolist.id));
   };
 
   return (

@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import { useAppDispatch, useAppSelector } from "common/hooks";
-import { selectTodolists } from "./model/todolists/todolistsSelectors";
-import { todolistsThunks } from "./model/todolists/todolistsSlice";
+import {
+  selectTodolists,
+  todolistsActions,
+} from "./model/todolists/todolistsSlice";
 import Paper from "@mui/material/Paper";
 import { Todolist } from "./Todolist/Todolist";
 
@@ -11,7 +13,7 @@ export const TodolistsList = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(todolistsThunks.setTodolists());
+    dispatch(todolistsActions.setTodolists());
   }, []);
   return (
     <>
