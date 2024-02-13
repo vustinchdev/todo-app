@@ -1,20 +1,26 @@
 import { BaseResponse } from "common/types";
-import { GetTasks, Task, UpdateTaskModel } from "./tasksApi.types";
+import {
+  GetTasks,
+  Task,
+  UpdateTaskModel,
+  AddTaskArgs,
+  RemoveTaskArgs,
+} from "./tasksApi.types";
 import { instance } from "common/api";
 
 export const tasksApi = {
   getTasks(todolistId: string) {
     return instance.get<GetTasks>(`todo-lists/${todolistId}/tasks`);
   },
-  addTask(todolistId: string, title: string) {
+  addTask(arg: AddTaskArgs) {
     return instance.post<BaseResponse<{ item: Task }>>(
-      `todo-lists/${todolistId}/tasks`,
-      { title },
+      `todo-lists/${arg.todolistId}/tasks`,
+      { title: arg.title },
     );
   },
-  delete(todolistId: string, taskId: string) {
+  deleteTask(arg: RemoveTaskArgs) {
     return instance.delete<BaseResponse>(
-      `todo-lists/${todolistId}/tasks/${taskId}`,
+      `todo-lists/${arg.todolistId}/tasks/${arg.taskId}`,
     );
   },
   updateTask(todolistId: string, taskId: string, model: UpdateTaskModel) {

@@ -25,3 +25,11 @@ export type UpdateTaskModel = {
   startDate: string;
   deadline: string;
 };
+export type AddTaskArgs = {
+  todolistId: string;
+  title: string;
+};
+export type RemoveTaskArgs = {
+  todolistId: string;
+  taskId: string;
+};
