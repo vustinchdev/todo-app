@@ -7,9 +7,11 @@ import {
 } from "./model/todolists/todolistsSlice";
 import Paper from "@mui/material/Paper";
 import { Todolist } from "./Todolist/Todolist";
+import { selectTasks } from "./model/tasks/tasksSlice";
 
 export const TodolistsList = () => {
   const todolists = useAppSelector(selectTodolists);
+  const tasks = useAppSelector(selectTasks);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -22,7 +24,7 @@ export const TodolistsList = () => {
           return (
             <Grid key={tl.id} item style={{ marginTop: "20px" }}>
               <Paper elevation={3} style={{ padding: "20px" }}>
-                <Todolist todolist={tl} />
+                <Todolist todolist={tl} tasks={tasks[tl.id]} />
               </Paper>
             </Grid>
           );
