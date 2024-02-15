@@ -5,6 +5,7 @@ import { Tasks } from "./Tasks/Tasks";
 import { TodolistTitle } from "./TodolistTitle/TodolistTitle";
 import { tasksActions } from "../model/tasks/tasksSlice";
 import { useAppDispatch } from "common/hooks";
+import { AddItemForm } from "common/components/AddItemForm/AddItemForm";
 
 type Props = {
   todolist: TodolistDomain;
@@ -18,11 +19,16 @@ export const Todolist = ({ todolist, tasks }: Props) => {
     dispatch(tasksActions.setTasks(todolist.id));
   }, []);
 
+  const addTaskCb = (title: string) => {
+    return dispatch(
+      tasksActions.addTask({ todolistId: todolist.id, title }),
+    ).unwrap();
+  };
+
   return (
     <div>
       <TodolistTitle todolist={todolist} />
-      <input />
-      <button>add</button>
+      <AddItemForm addItem={addTaskCb} />
       <Tasks tasks={tasks} />
       <div>
         <button>All</button>
