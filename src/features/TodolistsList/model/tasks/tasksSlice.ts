@@ -70,7 +70,7 @@ const slice = createAppSlice({
           },
         },
       ),
-      UpdateTask: createAThunk<UpdateTaskArg, UpdateTaskArg>(
+      updateTask: createAThunk<UpdateTaskArg, UpdateTaskArg>(
         async (arg, { rejectWithValue, getState }) => {
           const state = getState() as AppRootState;
           const task = state.tasks[arg.todolistId].find(
