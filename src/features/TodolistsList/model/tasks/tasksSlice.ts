@@ -6,7 +6,7 @@ import { tasksApi } from "features/TodolistsList/api/tasks/tasksApi";
 import {
   AddTaskArgs,
   RemoveTaskArgs,
-  Task,
+  TaskResponse,
   UpdateTaskModel,
 } from "features/TodolistsList/api/tasks/tasksApi.types";
 import { todolistsActions } from "../todolists/todolistsSlice";
@@ -22,7 +22,10 @@ const slice = createAppSlice({
       rejectValue: null | BaseResponse;
     }>();
     return {
-      setTasks: createAThunk<{ todolistId: string; tasks: Task[] }, string>(
+      setTasks: createAThunk<
+        { todolistId: string; tasks: TaskResponse[] },
+        string
+      >(
         async (todolistId, _) => {
           const res = await tasksApi.getTasks(todolistId);
           return { todolistId, tasks: res.data.items };
@@ -33,7 +36,10 @@ const slice = createAppSlice({
           },
         },
       ),
-      addTask: createAThunk<{ todolistId: string; task: Task }, AddTaskArgs>(
+      addTask: createAThunk<
+        { todolistId: string; task: TaskResponse },
+        AddTaskArgs
+      >(
         async (arg, { rejectWithValue }) => {
           const res = await tasksApi.addTask(arg);
           if (res.data.resultCode === ResultCode.SUCCEEDED) {
@@ -129,7 +135,7 @@ const slice = createAppSlice({
   },
 });
 
-export type TasksState = Record<string, Task[]>;
+export type TasksState = Record<string, TaskResponse[]>;
 export type UpdateDomainTaskModel = Partial<UpdateTaskModel>;
 type UpdateTaskArg = {
   todolistId: string;

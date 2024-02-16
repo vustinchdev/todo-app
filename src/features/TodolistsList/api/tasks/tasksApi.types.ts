@@ -1,6 +1,6 @@
 import { TaskPriorities, TaskStatuses } from "common/enums";
 
-export type Task = {
+export type TaskResponse = {
   description: string;
   title: string;
   status: TaskStatuses;
@@ -13,7 +13,7 @@ export type Task = {
   addedDate: string;
 };
 export type GetTasks = {
-  items: Task[];
+  items: TaskResponse[];
   totalCount: number;
   error: string | null;
 };

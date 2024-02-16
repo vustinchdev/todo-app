@@ -1,7 +1,7 @@
 import { BaseResponse } from "common/types";
 import {
   GetTasks,
-  Task,
+  TaskResponse,
   UpdateTaskModel,
   AddTaskArgs,
   RemoveTaskArgs,
@@ -13,7 +13,7 @@ export const tasksApi = {
     return instance.get<GetTasks>(`todo-lists/${todolistId}/tasks`);
   },
   addTask(arg: AddTaskArgs) {
-    return instance.post<BaseResponse<{ item: Task }>>(
+    return instance.post<BaseResponse<{ item: TaskResponse }>>(
       `todo-lists/${arg.todolistId}/tasks`,
       { title: arg.title },
     );
@@ -24,7 +24,7 @@ export const tasksApi = {
     );
   },
   updateTask(todolistId: string, taskId: string, model: UpdateTaskModel) {
-    return instance.put<BaseResponse<{ item: Task }>>(
+    return instance.put<BaseResponse<{ item: TaskResponse }>>(
       `todo-lists/${todolistId}/tasks/${taskId}`,
       model,
     );

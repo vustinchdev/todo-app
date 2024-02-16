@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Task } from "../api/tasks/tasksApi.types";
+import { TaskResponse } from "../api/tasks/tasksApi.types";
 import { TodolistDomain } from "../model/todolists/todolistsSlice";
 import { Tasks } from "./Tasks/Tasks";
 import { TodolistTitle } from "./TodolistTitle/TodolistTitle";
@@ -9,7 +9,7 @@ import { AddItemForm } from "common/components/AddItemForm/AddItemForm";
 
 type Props = {
   todolist: TodolistDomain;
-  tasks: Task[];
+  tasks: TaskResponse[];
 };
 
 export const Todolist = ({ todolist, tasks }: Props) => {
@@ -29,7 +29,7 @@ export const Todolist = ({ todolist, tasks }: Props) => {
     <div>
       <TodolistTitle todolist={todolist} />
       <AddItemForm addItem={addTaskCb} />
-      <Tasks tasks={tasks} />
+      <Tasks todolist={todolist} tasks={tasks} />
       <div>
         <button>All</button>
         <button>Completed</button>

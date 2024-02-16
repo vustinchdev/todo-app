@@ -1,14 +1,17 @@
-import { Task } from "features/TodolistsList/api/tasks/tasksApi.types";
+import { TaskResponse } from "features/TodolistsList/api/tasks/tasksApi.types";
+import { Todolist } from "features/TodolistsList/api/todolists/todolistsApi.types";
+import { Task } from "./Task/Task";
 
 type Props = {
-  tasks: Task[];
+  tasks: TaskResponse[];
+  todolist: Todolist;
 };
 
-export const Tasks = ({ tasks }: Props) => {
+export const Tasks = ({ todolist, tasks }: Props) => {
   return (
     <ul>
       {tasks.map((t) => {
-        return <li key={t.id}>{t.title}</li>;
+        return <Task key={t.id} todolistId={todolist.id} task={t} />;
       })}
     </ul>
   );
