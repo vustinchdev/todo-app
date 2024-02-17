@@ -5,8 +5,12 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import LinearProgress from "@mui/material/LinearProgress";
+import { useAppSelector } from "common/hooks";
+import { selectStatus } from "app/appSlice";
 
 export const ButtonAppBar = () => {
+  const status = useAppSelector(selectStatus);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -25,6 +29,7 @@ export const ButtonAppBar = () => {
           </Typography>
           <Button color="inherit">Logout</Button>
         </Toolbar>
+        {status === "loading" && <LinearProgress color="secondary" />}
       </AppBar>
     </Box>
   );
