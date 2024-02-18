@@ -16,8 +16,8 @@ export const AddItemForm = ({ addItem, disabled = false }: Props) => {
   const addItemHandler = () => {
     let newTitle = title.trim();
     if (newTitle !== "") {
-      addItem(title)
-        .then(() => {
+      addItem(newTitle)
+        .then((res) => {
           setTitle("");
         })
         .catch((e: BaseResponse) => {

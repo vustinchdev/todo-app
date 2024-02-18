@@ -16,11 +16,11 @@ export const TodolistsList = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(todolistsActions.setTodolists()).unwrap();
+    dispatch(todolistsActions.setTodolists());
   }, []);
 
   const addTodolist = (title: string) => {
-    return dispatch(todolistsActions.addTodolist(title));
+    return dispatch(todolistsActions.addTodolist(title)).unwrap();
   };
   return (
     <>
