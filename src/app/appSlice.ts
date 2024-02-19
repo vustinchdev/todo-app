@@ -62,5 +62,6 @@ const slice = createAppSlice({
 export const appReducer = slice.reducer;
 export const appActions = slice.actions;
 export const { selectStatus, selectError } = slice.selectors;
+export type AppState = ReturnType<typeof slice.getInitialState>;
 
 export type RequestStatus = "idle" | "loading" | "succeeded" | "failed";
