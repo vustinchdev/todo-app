@@ -18,6 +18,7 @@ beforeEach(() => {
         priority: TaskPriorities.Low,
         startDate: "",
         todoListId: "todolistId1",
+        taskStatus: "idle",
       },
       {
         id: "2",
@@ -30,6 +31,7 @@ beforeEach(() => {
         priority: TaskPriorities.Low,
         startDate: "",
         todoListId: "todolistId1",
+        taskStatus: "idle",
       },
       {
         id: "3",
@@ -42,6 +44,7 @@ beforeEach(() => {
         priority: TaskPriorities.Low,
         startDate: "",
         todoListId: "todolistId1",
+        taskStatus: "idle",
       },
     ],
     todolistId2: [
@@ -56,6 +59,7 @@ beforeEach(() => {
         priority: TaskPriorities.Low,
         startDate: "",
         todoListId: "todolistId2",
+        taskStatus: "idle",
       },
       {
         id: "2",
@@ -68,6 +72,7 @@ beforeEach(() => {
         priority: TaskPriorities.Low,
         startDate: "",
         todoListId: "todolistId2",
+        taskStatus: "idle",
       },
       {
         id: "3",
@@ -80,6 +85,7 @@ beforeEach(() => {
         priority: TaskPriorities.Low,
         startDate: "",
         todoListId: "todolistId2",
+        taskStatus: "idle",
       },
     ],
   };
