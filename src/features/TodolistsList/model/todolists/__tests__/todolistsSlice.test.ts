@@ -21,6 +21,7 @@ beforeEach(() => {
       filter: "all",
       addedDate: "",
       order: 0,
+      todolistStatus: "idle",
     },
     {
       id: todolistId2,
@@ -28,6 +29,7 @@ beforeEach(() => {
       filter: "all",
       addedDate: "",
       order: 0,
+      todolistStatus: "idle",
     },
   ];
 });

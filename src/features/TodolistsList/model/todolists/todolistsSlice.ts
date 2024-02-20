@@ -1,4 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
+import { RequestStatus } from "app/appSlice";
 import { ResultCode } from "common/enums";
 import { BaseResponse } from "common/types";
 import { createAppSlice } from "common/utils";
@@ -38,7 +39,7 @@ const slice = createAppSlice({
         {
           fulfilled: (state, action) => {
             action.payload.todolists.forEach((tl) => {
-              state.push({ ...tl, filter: "all" });
+              state.push({ ...tl, filter: "all", todolistStatus: "idle" });
             });
           },
         },
@@ -54,7 +55,11 @@ const slice = createAppSlice({
         },
         {
           fulfilled: (state, action) => {
-            state.unshift({ ...action.payload.todolist, filter: "all" });
+            state.unshift({
+              ...action.payload.todolist,
+              filter: "all",
+              todolistStatus: "idle",
+            });
           },
         },
       ),
@@ -68,12 +73,25 @@ const slice = createAppSlice({
           }
         },
         {
+          pending: (state, action) => {
+            const todolist = state.find((todo) => todo.id === action.meta.arg);
+            if (todolist) {
+              todolist.todolistStatus = "loading";
+            }
+          },
           fulfilled: (state, action) => {
             const index = state.findIndex(
               (todo) => todo.id === action.payload.id,
             );
             if (index !== -1) {
+              state[index].todolistStatus = "succeeded";
               state.splice(index, 1);
+            }
+          },
+          rejected: (state, action) => {
+            const todolist = state.find((todo) => todo.id === action.meta.arg);
+            if (todolist) {
+              todolist.todolistStatus = "failed";
             }
           },
         },
@@ -107,6 +125,7 @@ const slice = createAppSlice({
 
 export type TodolistDomain = Todolist & {
   filter: FilterValues;
+  todolistStatus: RequestStatus;
 };
 export type FilterValues = "all" | "completed" | "active";
 

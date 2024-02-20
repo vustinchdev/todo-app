@@ -49,11 +49,12 @@ export const AddItemForm = ({ addItem, disabled = false }: Props) => {
         size="small"
         variant="standard"
         value={title}
+        disabled={disabled}
         onChange={ChangeTitleHandler}
         helperText={error}
         onKeyDown={addItemOnEnterHandler}
       />
-      <IconButton onClick={addItemHandler}>
+      <IconButton onClick={addItemHandler} disabled={disabled}>
         <AddTaskIcon />
       </IconButton>
     </div>
