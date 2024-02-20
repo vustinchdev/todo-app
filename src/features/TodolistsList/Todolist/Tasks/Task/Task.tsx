@@ -11,9 +11,10 @@ import { TaskStatuses } from "common/enums";
 type Props = {
   todolistId: string;
   task: TaskResponse;
+  disabled: boolean;
 };
 
-export const Task = ({ todolistId, task }: Props) => {
+export const Task = ({ todolistId, task, disabled }: Props) => {
   const dispatch = useAppDispatch();
 
   const onChangeTaskHandler = (title: string) => {
@@ -46,9 +47,18 @@ export const Task = ({ todolistId, task }: Props) => {
       <Checkbox
         checked={task.status === TaskStatuses.Completed}
         onChange={changeTaskStatusHandler}
+        disabled={disabled}
       />
-      <EditableSpan titleValue={task.title} onChange={onChangeTaskHandler} />
-      <IconButton aria-label="delete" onClick={deleteTaskHandler}>
+      <EditableSpan
+        titleValue={task.title}
+        onChange={onChangeTaskHandler}
+        disabled={disabled}
+      />
+      <IconButton
+        aria-label="delete"
+        onClick={deleteTaskHandler}
+        disabled={disabled}
+      >
         <BackspaceIcon />
       </IconButton>
     </li>

@@ -10,6 +10,7 @@ import {
   UpdateTaskModel,
 } from "features/TodolistsList/api/tasks/tasksApi.types";
 import { todolistsActions } from "../todolists/todolistsSlice";
+import { RequestStatus } from "app/appSlice";
 
 const slice = createAppSlice({
   name: "tasks",
@@ -32,7 +33,9 @@ const slice = createAppSlice({
         },
         {
           fulfilled: (state, action) => {
-            state[action.payload.todolistId] = action.payload.tasks;
+            state[action.payload.todolistId] = action.payload.tasks.map(
+              (t) => ({ ...t, taskStatus: "idle" }),
+            );
           },
         },
       ),
@@ -51,7 +54,7 @@ const slice = createAppSlice({
         {
           fulfilled: (state, action) => {
             const tasks = state[action.payload.todolistId];
-            tasks.unshift(action.payload.task);
+            tasks.unshift({ ...action.payload.task, taskStatus: "idle" });
           },
         },
       ),
@@ -65,13 +68,32 @@ const slice = createAppSlice({
           }
         },
         {
+          pending: (state, action) => {
+            const tasks = state[action.meta.arg.todolistId];
+            const task = tasks.find(
+              (task) => task.id === action.meta.arg.taskId,
+            );
+            if (task) {
+              task.taskStatus = "loading";
+            }
+          },
           fulfilled: (state, action) => {
             const tasks = state[action.payload.todolistId];
             const index = tasks.findIndex(
               (todo) => todo.id === action.payload.taskId,
             );
             if (index !== -1) {
+              tasks[index].taskStatus = "succeeded";
               tasks.splice(index, 1);
+            }
+          },
+          rejected: (state, action) => {
+            const tasks = state[action.meta.arg.todolistId];
+            const task = tasks.find(
+              (task) => task.id === action.meta.arg.taskId,
+            );
+            if (task) {
+              task.taskStatus = "failed";
             }
           },
         },
@@ -135,8 +157,11 @@ const slice = createAppSlice({
   },
 });
 
-export type TasksState = Record<string, TaskResponse[]>;
+export type TasksState = Record<string, TaskDomain[]>;
 export type UpdateDomainTaskModel = Partial<UpdateTaskModel>;
+export type TaskDomain = TaskResponse & {
+  taskStatus: RequestStatus;
+};
 type UpdateTaskArg = {
   todolistId: string;
   taskId: string;

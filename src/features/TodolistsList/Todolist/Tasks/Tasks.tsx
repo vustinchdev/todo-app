@@ -1,10 +1,10 @@
-import { TaskResponse } from "features/TodolistsList/api/tasks/tasksApi.types";
 import { Task } from "./Task/Task";
 import { TodolistDomain } from "features/TodolistsList/model/todolists/todolistsSlice";
 import { TaskStatuses } from "common/enums";
+import { TaskDomain } from "features/TodolistsList/model/tasks/tasksSlice";
 
 type Props = {
-  tasks: TaskResponse[];
+  tasks: TaskDomain[];
   todolist: TodolistDomain;
 };
 
@@ -23,7 +23,14 @@ export const Tasks = ({ todolist, tasks }: Props) => {
   return (
     <ul>
       {tasksForTodolist.map((t) => {
-        return <Task key={t.id} todolistId={todolist.id} task={t} />;
+        return (
+          <Task
+            key={t.id}
+            todolistId={todolist.id}
+            task={t}
+            disabled={t.taskStatus === "loading"}
+          />
+        );
       })}
     </ul>
   );

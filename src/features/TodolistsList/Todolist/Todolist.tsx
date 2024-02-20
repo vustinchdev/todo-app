@@ -1,16 +1,15 @@
 import { useEffect } from "react";
-import { TaskResponse } from "../api/tasks/tasksApi.types";
 import { TodolistDomain } from "../model/todolists/todolistsSlice";
 import { Tasks } from "./Tasks/Tasks";
 import { TodolistTitle } from "./TodolistTitle/TodolistTitle";
-import { tasksActions } from "../model/tasks/tasksSlice";
+import { TaskDomain, tasksActions } from "../model/tasks/tasksSlice";
 import { useAppDispatch } from "common/hooks";
 import { AddItemForm } from "common/components/AddItemForm/AddItemForm";
 import { FilterTasksButtons } from "./FilterTasksButtons/FilterTasksButtons";
 
 type Props = {
   todolist: TodolistDomain;
-  tasks: TaskResponse[];
+  tasks: TaskDomain[];
 };
 
 export const Todolist = ({ todolist, tasks }: Props) => {
