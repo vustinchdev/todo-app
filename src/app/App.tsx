@@ -3,6 +3,8 @@ import "./App.css";
 import Container from "@mui/material/Container";
 import { ButtonAppBar } from "common/components/ButtonAppBar/ButtonAppBar";
 import { ErrorSnackbar } from "common/components/ErrorSnackbar/ErrorSnackbar";
+import { RouterProvider } from "react-router-dom";
+import { router } from "common/routes/router";
 
 function App() {
   return (
@@ -10,7 +12,7 @@ function App() {
       <ErrorSnackbar />
       <ButtonAppBar />
       <Container>
-        <TodolistsList />
+        <RouterProvider router={router} />
       </Container>
     </div>
   );
