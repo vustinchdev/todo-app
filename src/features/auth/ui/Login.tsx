@@ -8,10 +8,15 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import { LoginParams } from "../api/authApi.types";
+import { useAppDispatch, useAppSelector } from "common/hooks";
+import { authActions, selectIsLoggedIn } from "../model/authSlice";
+import { Navigate } from "react-router-dom";
 
 type FormikError = Partial<Omit<LoginParams, "captcha">>;
 
 export const Login = () => {
+  const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const EMAIL_REGEXP = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
   const { touched, errors, handleSubmit, getFieldProps } =
@@ -21,8 +26,8 @@ export const Login = () => {
         password: "",
         rememberMe: false,
       },
-      onSubmit: (values, formikHelpers) => {
-        alert(JSON.stringify(values));
+      onSubmit: (values) => {
+        dispatch(authActions.login(values));
       },
       validate: (values: LoginParams) => {
         const errors: FormikError = {};
@@ -39,6 +44,10 @@ export const Login = () => {
         return errors;
       },
     });
+
+  if (isLoggedIn) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Grid container justifyContent={"center"}>

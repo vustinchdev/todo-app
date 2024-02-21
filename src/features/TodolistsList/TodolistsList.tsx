@@ -9,19 +9,30 @@ import Paper from "@mui/material/Paper";
 import { Todolist } from "./Todolist/Todolist";
 import { selectTasks } from "./model/tasks/tasksSlice";
 import { AddItemForm } from "common/components/AddItemForm/AddItemForm";
+import { selectIsLoggedIn } from "features/auth/model/authSlice";
+import { Navigate } from "react-router-dom";
 
 export const TodolistsList = () => {
   const todolists = useAppSelector(selectTodolists);
   const tasks = useAppSelector(selectTasks);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      return;
+    }
     dispatch(todolistsActions.setTodolists());
   }, []);
 
   const addTodolist = (title: string) => {
     return dispatch(todolistsActions.addTodolist(title)).unwrap();
   };
+
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <>
       <Grid container style={{ margin: "20px" }}>
