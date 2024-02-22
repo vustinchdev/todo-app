@@ -38,11 +38,25 @@ const slice = createAppSlice({
           }
         },
       ),
+      initializeApp: createAThunk<{ isLoggedIn: boolean }, undefined>(
+        async (_, { rejectWithValue }) => {
+          const res = await authApi.me();
+          if (res.data.resultCode === ResultCode.SUCCEEDED) {
+            return { isLoggedIn: true };
+          } else {
+            return rejectWithValue(res.data);
+          }
+        },
+      ),
     };
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      isFulfilled(authActions.login, authActions.logout),
+      isFulfilled(
+        authActions.login,
+        authActions.logout,
+        authActions.initializeApp,
+      ),
       (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
         state.isLoggedIn = action.payload.isLoggedIn;
       },
