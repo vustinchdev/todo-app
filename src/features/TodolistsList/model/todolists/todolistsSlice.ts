@@ -8,6 +8,7 @@ import {
   Todolist,
   UpdateTodolistTitleArg,
 } from "features/TodolistsList/api/todolists/todolistsApi.types";
+import { authActions } from "features/auth/model/authSlice";
 
 const slice = createAppSlice({
   name: "todolists",
@@ -120,6 +121,11 @@ const slice = createAppSlice({
         },
       ),
     };
+  },
+  extraReducers: (builder) => {
+    builder.addCase(authActions.logout.fulfilled, () => {
+      return [];
+    });
   },
 });
 

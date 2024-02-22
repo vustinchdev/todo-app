@@ -11,6 +11,7 @@ import {
 } from "features/TodolistsList/api/tasks/tasksApi.types";
 import { todolistsActions } from "../todolists/todolistsSlice";
 import { RequestStatus } from "app/appSlice";
+import { authActions } from "features/auth/model/authSlice";
 
 const slice = createAppSlice({
   name: "tasks",
@@ -153,6 +154,9 @@ const slice = createAppSlice({
       })
       .addCase(todolistsActions.deleteTodolist.fulfilled, (state, action) => {
         delete state[action.payload.id];
+      })
+      .addCase(authActions.logout.fulfilled, () => {
+        return {};
       });
   },
 });
