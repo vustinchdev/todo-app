@@ -67,3 +67,4 @@ const slice = createAppSlice({
 export const authReducer = slice.reducer;
 export const authActions = slice.actions;
 export const { selectIsLoggedIn } = slice.selectors;
+export type AuthState = ReturnType<typeof slice.getInitialState>;
