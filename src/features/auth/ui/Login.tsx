@@ -6,44 +6,12 @@ import FormGroup from "@mui/material/FormGroup";
 import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useFormik } from "formik";
-import { LoginParams } from "../api/authApi.types";
-import { useAppDispatch, useAppSelector } from "common/hooks";
-import { authActions, selectIsLoggedIn } from "../model/authSlice";
 import { Navigate } from "react-router-dom";
-
-type FormikError = Partial<Omit<LoginParams, "captcha">>;
+import { useLogin } from "../lib/useLogin";
 
 export const Login = () => {
-  const dispatch = useAppDispatch();
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
-  const EMAIL_REGEXP = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-
-  const { touched, errors, handleSubmit, getFieldProps } =
-    useFormik<LoginParams>({
-      initialValues: {
-        email: "",
-        password: "",
-        rememberMe: false,
-      },
-      onSubmit: (values) => {
-        dispatch(authActions.login(values));
-      },
-      validate: (values: LoginParams) => {
-        const errors: FormikError = {};
-        if (!values.email) {
-          errors.email = "Required";
-        } else if (!EMAIL_REGEXP.test(values.email)) {
-          errors.email = "Invalid email address";
-        }
-        if (!values.password) {
-          errors.password = "Required";
-        } else if (values.password.length < 3) {
-          errors.password = "Password should be 3 or more characters longs";
-        }
-        return errors;
-      },
-    });
+  const { errors, isLoggedIn, touched, handleSubmit, getFieldProps } =
+    useLogin();
 
   if (isLoggedIn) {
     return <Navigate to="/" />;
