@@ -11,6 +11,7 @@ import { selectTasks } from "./model/tasks/tasksSlice";
 import { AddItemForm } from "common/components/AddItemForm/AddItemForm";
 import { selectIsLoggedIn } from "features/auth/model/authSlice";
 import { Navigate } from "react-router-dom";
+import s from "./TodolistList.module.css";
 
 export const TodolistsList = () => {
   const todolists = useAppSelector(selectTodolists);
@@ -43,7 +44,11 @@ export const TodolistsList = () => {
         {todolists.map((tl) => {
           return (
             <Grid key={tl.id} item style={{ marginTop: "20px" }}>
-              <Paper elevation={3} style={{ padding: "20px" }}>
+              <Paper
+                elevation={3}
+                style={{ padding: "20px" }}
+                className={s.paper}
+              >
                 <Todolist todolist={tl} tasks={tasks[tl.id]} />
               </Paper>
             </Grid>

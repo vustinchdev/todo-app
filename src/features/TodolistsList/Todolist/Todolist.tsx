@@ -6,6 +6,7 @@ import { TaskDomain, tasksActions } from "../model/tasks/tasksSlice";
 import { useAppDispatch } from "common/hooks";
 import { AddItemForm } from "common/components/AddItemForm/AddItemForm";
 import { FilterTasksButtons } from "./FilterTasksButtons/FilterTasksButtons";
+import s from "./Todolist.module.css";
 
 type Props = {
   todolist: TodolistDomain;
@@ -26,7 +27,7 @@ export const Todolist = ({ todolist, tasks }: Props) => {
   };
 
   return (
-    <div>
+    <div className={s.todolist}>
       <TodolistTitle todolist={todolist} />
       <AddItemForm
         addItem={addTaskCb}

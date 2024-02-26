@@ -9,6 +9,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { useAppDispatch, useAppSelector } from "common/hooks";
 import { selectStatus } from "app/appSlice";
 import { authActions, selectIsLoggedIn } from "features/auth/model/authSlice";
+import s from "./ButtonAppBar.module.css";
 
 export const ButtonAppBar = () => {
   const status = useAppSelector(selectStatus);
@@ -21,7 +22,7 @@ export const ButtonAppBar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" className={s.appBar}>
         <Toolbar>
           <IconButton
             size="large"
@@ -37,7 +38,7 @@ export const ButtonAppBar = () => {
           </Typography>
           {isLoggedIn && (
             <Button color="inherit" onClick={logoutHandler}>
-              Logout
+              Log out
             </Button>
           )}
         </Toolbar>
