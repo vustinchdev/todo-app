@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Navigate } from "react-router-dom";
 import { useLogin } from "../lib/useLogin";
+import s from "./Login.module.css";
 
 export const Login = () => {
   const { errors, isLoggedIn, touched, handleSubmit, getFieldProps } =
@@ -20,7 +21,7 @@ export const Login = () => {
   return (
     <Grid container justifyContent={"center"}>
       <Grid item justifyContent={"center"}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={s.formLogin}>
           <FormControl>
             <FormLabel>
               <p>
@@ -40,7 +41,9 @@ export const Login = () => {
             <FormGroup>
               <TextField
                 label="Email"
+                variant="standard"
                 margin="normal"
+                sx={{ backgroundColor: "transparent" }}
                 {...getFieldProps("email")}
               />
               {touched.email && errors.email && (
@@ -50,6 +53,7 @@ export const Login = () => {
                 type="password"
                 label="Password"
                 margin="normal"
+                variant="standard"
                 {...getFieldProps("password")}
               />
               {touched.password && errors.password && (
@@ -59,7 +63,11 @@ export const Login = () => {
                 label={"Remember me"}
                 control={<Checkbox {...getFieldProps("rememberMe")} />}
               />
-              <Button type={"submit"} variant={"contained"} color={"primary"}>
+              <Button
+                type={"submit"}
+                variant={"contained"}
+                sx={{ backgroundColor: "#722f37" }}
+              >
                 Login
               </Button>
             </FormGroup>
