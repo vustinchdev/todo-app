@@ -1,5 +1,7 @@
 .todolist {
   position: relative;
+  font-style: italic;
+  font-weight: 500;
 }
 
 .todolist::before {
