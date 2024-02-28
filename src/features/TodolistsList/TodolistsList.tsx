@@ -36,7 +36,7 @@ export const TodolistsList = () => {
 
   return (
     <>
-      <Grid container style={{ margin: "20px" }}>
+      <Grid container className={s.addItem}>
         <AddItemForm addItem={addTodolist} />
       </Grid>
 
