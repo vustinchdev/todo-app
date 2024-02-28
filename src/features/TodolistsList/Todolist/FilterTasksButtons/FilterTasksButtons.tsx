@@ -20,12 +20,26 @@ export const FilterTasksButtons = ({ todolist }: Props) => {
   };
   return (
     <div>
-      <Button onClick={() => changeTodolistFilterHandler("all")}>All</Button>
-      <Button onClick={() => changeTodolistFilterHandler("completed")}>
-        Completed
+      <Button
+        variant={todolist.filter === "all" ? "outlined" : "contained"}
+        color="success"
+        onClick={() => changeTodolistFilterHandler("all")}
+      >
+        All
       </Button>
-      <Button onClick={() => changeTodolistFilterHandler("active")}>
+      <Button
+        variant={todolist.filter === "active" ? "outlined" : "contained"}
+        color="primary"
+        onClick={() => changeTodolistFilterHandler("active")}
+      >
         Active
+      </Button>
+      <Button
+        variant={todolist.filter === "completed" ? "outlined" : "contained"}
+        color="error"
+        onClick={() => changeTodolistFilterHandler("completed")}
+      >
+        Completed
       </Button>
     </div>
   );
