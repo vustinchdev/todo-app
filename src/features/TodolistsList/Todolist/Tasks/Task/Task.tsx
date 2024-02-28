@@ -7,6 +7,7 @@ import BackspaceIcon from "@mui/icons-material/Backspace";
 import Checkbox from "@mui/material/Checkbox";
 import { ChangeEvent } from "react";
 import { TaskStatuses } from "common/enums";
+import s from "./Task.module.css";
 
 type Props = {
   todolistId: string;
@@ -43,11 +44,16 @@ export const Task = ({ todolistId, task, disabled }: Props) => {
   };
 
   return (
-    <li>
+    <li className={task.status === TaskStatuses.Completed ? s.isDone : ""}>
       <Checkbox
         checked={task.status === TaskStatuses.Completed}
         onChange={changeTaskStatusHandler}
         disabled={disabled}
+        style={
+          task.status === TaskStatuses.Completed
+            ? { color: "#d32f2f" }
+            : { color: "#1976d2" }
+        }
       />
       <EditableSpan
         titleValue={task.title}
@@ -59,7 +65,13 @@ export const Task = ({ todolistId, task, disabled }: Props) => {
         onClick={deleteTaskHandler}
         disabled={disabled}
       >
-        <BackspaceIcon />
+        <BackspaceIcon
+          style={
+            task.status === TaskStatuses.Completed
+              ? { color: "#d32f2f" }
+              : { color: "#1976d2" }
+          }
+        />
       </IconButton>
     </li>
   );

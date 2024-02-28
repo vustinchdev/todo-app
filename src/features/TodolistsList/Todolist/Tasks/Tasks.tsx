@@ -3,6 +3,7 @@ import { TodolistDomain } from "features/TodolistsList/model/todolists/todolists
 import { TaskStatuses } from "common/enums";
 import { TaskDomain } from "features/TodolistsList/model/tasks/tasksSlice";
 
+
 type Props = {
   tasks: TaskDomain[];
   todolist: TodolistDomain;
