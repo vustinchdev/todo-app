@@ -7,6 +7,7 @@ import { useAppDispatch } from "common/hooks";
 import { AddItemForm } from "common/components/AddItemForm/AddItemForm";
 import { FilterTasksButtons } from "./FilterTasksButtons/FilterTasksButtons";
 import s from "./Todolist.module.css";
+import { TodolistDeleteButton } from "./TodolistDeleteButton/TodolistDeleteButton";
 
 type Props = {
   todolist: TodolistDomain;
@@ -28,6 +29,7 @@ export const Todolist = ({ todolist, tasks }: Props) => {
 
   return (
     <div className={s.todolist}>
+      <TodolistDeleteButton todolist={todolist} />
       <TodolistTitle todolist={todolist} />
       <AddItemForm
         addItem={addTaskCb}
