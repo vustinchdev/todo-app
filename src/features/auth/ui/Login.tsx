@@ -43,7 +43,6 @@ export const Login = () => {
                 label="Email"
                 variant="standard"
                 margin="normal"
-                sx={{ backgroundColor: "transparent" }}
                 {...getFieldProps("email")}
               />
               {touched.email && errors.email && (

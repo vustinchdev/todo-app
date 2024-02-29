@@ -10,15 +10,6 @@ beforeEach(() => {
   };
 });
 
-test("correct status should be set", () => {
-  const endState = appReducer(
-    startState,
-    appActions.changeAppStatus({ status: "loading" }),
-  );
-
-  expect(endState.status).toBe("loading");
-});
-
 test("correct error message should be set", () => {
   const endState = appReducer(
     startState,

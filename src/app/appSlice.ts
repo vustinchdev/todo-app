@@ -24,11 +24,6 @@ const slice = createAppSlice({
   },
   reducers: (creators) => {
     return {
-      changeAppStatus: creators.reducer(
-        (state, action: PayloadAction<{ status: RequestStatus }>) => {
-          state.status = action.payload.status;
-        },
-      ),
       setAppError: creators.reducer(
         (state, action: PayloadAction<{ error: null | string }>) => {
           state.error = action.payload.error;
