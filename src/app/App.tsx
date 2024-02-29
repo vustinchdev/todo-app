@@ -8,7 +8,8 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "common/hooks";
 import { authActions } from "features/auth/model/authSlice";
 import { selectIsInitialized } from "./appSlice";
-import CircularProgress from "@mui/material/CircularProgress";
+import { LoadingIndicator } from "common/components/LoadingIndicator/LoadingIndicator";
+
 
 function App() {
   const dispatch = useAppDispatch();
@@ -20,16 +21,7 @@ function App() {
 
   if (!isInitialized) {
     return (
-      <div
-        style={{
-          position: "fixed",
-          top: "40%",
-          textAlign: "center",
-          width: "100%",
-        }}
-      >
-        <CircularProgress />
-      </div>
+      <LoadingIndicator/>
     );
   }
 
