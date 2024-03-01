@@ -3,6 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { BaseResponse } from "common/types";
+import s from './AddItemForm.module.css'
 
 type Props = {
   addItem: (newTitle: string) => Promise<any>;
@@ -41,7 +42,7 @@ export const AddItemForm = ({ addItem, disabled = false }: Props) => {
     }
   };
   return (
-    <div>
+    <div className={s.container}>
       <TextField
         error={!!error}
         id="standard-basic"
@@ -52,10 +53,11 @@ export const AddItemForm = ({ addItem, disabled = false }: Props) => {
         disabled={disabled}
         onChange={ChangeTitleHandler}
         helperText={error}
+        color='success'
         onKeyDown={addItemOnEnterHandler}
       />
       <IconButton onClick={addItemHandler} disabled={disabled}>
-        <AddTaskIcon />
+        <AddTaskIcon style={{color: '2e7d32'}} />
       </IconButton>
     </div>
   );

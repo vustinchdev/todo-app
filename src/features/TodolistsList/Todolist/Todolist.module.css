@@ -1,7 +1,5 @@
 .todolist {
   position: relative;
-  font-style: italic;
-  font-weight: 500;
   word-break: break-word;
   max-width: 350px;
 }

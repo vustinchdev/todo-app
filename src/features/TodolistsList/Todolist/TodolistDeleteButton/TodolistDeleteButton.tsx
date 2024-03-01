@@ -23,7 +23,7 @@ export const TodolistDeleteButton = ({ todolist }: Props) => {
         onClick={removeTodolistHandler}
         disabled={todolist.todolistStatus === "loading"}
       >
-        <ClearIcon />
+        <ClearIcon style={{color: 'd32f2f'}} />
       </IconButton>
     </div>
   );

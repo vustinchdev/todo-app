@@ -35,7 +35,7 @@ export const TodolistsList = () => {
   }
 
   return (
-    <>
+    <div className={s.todolistList}>
       <Grid container className={s.addItem}>
         <AddItemForm addItem={addTodolist} />
       </Grid>
@@ -55,6 +55,6 @@ export const TodolistsList = () => {
           );
         })}
       </Grid>
-    </>
+    </div>
   );
 };
